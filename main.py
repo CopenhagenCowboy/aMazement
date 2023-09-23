@@ -1,11 +1,13 @@
 from window import *
+from drawables import *
+from maze import *
 
 def main():
-    win = Window(800, 600)
-    p1 = Point(100, 100)
-    p2 = Point(550, 150)
-    l = Line(p1, p2)
-    win.draw_line(l, "black")
+    win = Window(1600, 1200)
+    num_cols = 10
+    num_rows = 10
+    maze = Maze(50, 50, num_rows, num_cols, 50, win)
+    maze.create_cells()
     win.wait_for_close()
     
     
