@@ -36,6 +36,7 @@ class Cell:
         self._lower_right = lower_right
         self._has_left, self._has_right, self._has_top, self._has_bottom \
             = (has_left_wall, has_right_wall, has_top_wall, has_bottom_wall)
+        self._visited = False
     
     def draw(self):
         if self._win is None:
@@ -51,18 +52,6 @@ class Cell:
 
         wall = Line(Point(self._upper_left.x, self._lower_right.y), self._lower_right)
         self._win.draw_line(wall, "black" if self._has_bottom else "white")
-        # if self._has_left:
-        #     wall = Line(self._upper_left, Point(self._upper_left.x, self._lower_right.y))
-        #     self._win.draw_line(wall, "black")
-        # if self._has_right:
-        #     wall = Line(Point(self._lower_right.x, self._upper_left.y), self._lower_right)
-        #     self._win.draw_line(wall, "black")
-        # if self._has_top:
-        #     wall = Line(self._upper_left, Point(self._lower_right.x, self._upper_left.y))
-        #     self._win.draw_line(wall, "black")
-        # if self._has_bottom:
-        #     wall = Line(Point(self._upper_left.x, self._lower_right.y), self._lower_right)
-        #     self._win.draw_line(wall, "black")
     
     def draw_move(self, to_cell, undo=False):
         if self._win is None:
