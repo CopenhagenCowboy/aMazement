@@ -1,5 +1,11 @@
 from tkinter import Canvas, BOTH
 
+
+'''
+A 2d point given by its x/y coordinates.
+x gives the number of pixels from left side of window.
+y gives the number of pixel form top of window
+'''
 class Point:
     def __init__(self):
         self.x = 0
@@ -8,7 +14,10 @@ class Point:
     def __init__(self, x, y):
         self.x = x
         self.y = y
-        
+
+'''
+A 2d line given by two points with a method to draw itself on a canvas.
+'''        
 class Line:
     def __init__(self, p1, p2):
         self.begin = p1
@@ -21,8 +30,19 @@ class Line:
 def get_midpoint(p1, p2):
     out = Point((p1.x + p2.x)/2., (p1.y + p2.y)/2.)
     return out
-        
+
+
+'''
+A cell, i.e., a rectangular space on the canvas, given by its
+_upper_left corner and _lower_right corner.
+_has_left, _has_right, _has_top and _has_bottom indicate whether the
+cell has a wall at these four locations.
+'''        
 class Cell:
+    '''
+    _visited is for the breadth first and depth first algorithms used to
+    generate a maze and find its solution respectively.
+    '''
     def __init__(self, 
                  window, 
                  upper_left, 
@@ -38,6 +58,12 @@ class Cell:
             = (has_left_wall, has_right_wall, has_top_wall, has_bottom_wall)
         self._visited = False
     
+    
+    '''
+    Draws the cell on the canvas. All the cell's walls are drawn in black and its
+    non-walls are drawn in white. This is so changes (read: removal of walls) made 
+    to the cells can be seen when they are redrawn.
+    '''
     def draw(self):
         if self._win is None:
             return
@@ -53,6 +79,11 @@ class Cell:
         wall = Line(Point(self._upper_left.x, self._lower_right.y), self._lower_right)
         self._win.draw_line(wall, "black" if self._has_bottom else "white")
     
+    
+    '''
+    Draws a move from one cell to another, depicted by a red line between their centers.
+    undo indicates whether the move is a backtrack or not.
+    '''
     def draw_move(self, to_cell, undo=False):
         if self._win is None:
             return

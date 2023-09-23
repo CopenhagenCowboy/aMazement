@@ -1,5 +1,11 @@
 from tkinter import Tk, BOTH, Canvas
 
+
+'''
+A barebones window to display a maze and the solution through it.
+Implements essentially one graphical feature namely the ability
+to draw a line in a desired color.
+'''
 class Window:
     def __init__(self, width, height):
         self.__root = Tk()
