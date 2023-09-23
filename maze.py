@@ -23,6 +23,7 @@ class Maze:
         self.break_entrance_and_exit()
         random.seed(seed)
         self.break_walls(0, 0)
+        self.reset_cells_visited()
     
     def create_cells(self):
         for i in range(self._num_cols):
@@ -47,7 +48,7 @@ class Maze:
         
     def animate(self):
         self._win.redraw()
-        time.sleep(0.05)
+        time.sleep(0.01)
         
     def break_entrance_and_exit(self):
         self.get_cell(0, 0)._has_top = False
@@ -105,4 +106,8 @@ class Maze:
             self.break_wall_between_adjacent_cells((i, j), next_cell)
             self.break_walls(next_cell[0], next_cell[1])
         self.draw_cell(i, j)
+        
+    def reset_cells_visited(self):
+        for cell in self._cells:
+            cell._visited = False
             
